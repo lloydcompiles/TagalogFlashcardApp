@@ -23,5 +23,10 @@ ArrayList collections.
 - Java
 - IntelliJ IDEA
 
+## How to Run
+1. Clone the repo: `git clone https://github.com/lloydcompiles/TagalogFlashcardApp.git`
+2. Open the project in IntelliJ IDEA
+3. Run `Main.java`
+
 ## Author
 lloydcompiles
