@@ -21,4 +21,8 @@ public class FlashcardDeck {
     public int getSize() {
         return deck.size();
     }
+
+    public ArrayList<Flashcard> getDeck() {
+        return deck;
+    }
 }
