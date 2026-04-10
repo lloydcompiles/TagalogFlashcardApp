@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.Scanner;
 
 // Entry point for the Tagalog Flashcard App - runs an interactive quiz with retry logic
@@ -16,6 +17,12 @@ public class Main {
 
         System.out.println("Deck contains " + myDeck.getSize() +" cards");
 
+        // Shuffle the deck
+        Collections.shuffle(myDeck.getDeck());
+
+        // Count correct answers
+        int correctCount = 0;
+
         for (Flashcard card : myDeck.getDeck()) {
             int guessTotal = 2;
             System.out.println("Please type the English word for: " + card.getTagalog());
@@ -30,6 +37,8 @@ public class Main {
             if (englishTranslation.equalsIgnoreCase(card.getEnglish())) {
                 System.out.println("You translated '" + card.getTagalog() + "' to '" + englishTranslation + "' which matches our translation 👍");
                 System.out.println();
+                //Update correct count
+                correctCount++;
             } else if (guessTotal == 0) {
                 System.out.println("Unfortunately you translated '" + card.getTagalog() + "' incorrectly 👎");
                 System.out.println("Our translation of '" + card.getTagalog() + "' is '" + card.getEnglish() + "' in English. Let's try another word.");
@@ -37,7 +46,7 @@ public class Main {
             }
         }
 
-        System.out.println("No more words left to translate. Thanks for playing! Paalam!");
+        System.out.println("No more words left to translate. You got " + correctCount + " correct. Thanks for playing! Paalam!");
 
     }
 }
