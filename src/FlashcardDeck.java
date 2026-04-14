@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 // Manages a collection of Flashcard objects, supporting add, display, and size operations
 public class FlashcardDeck {
@@ -24,5 +26,23 @@ public class FlashcardDeck {
 
     public ArrayList<Flashcard> getDeck() {
         return deck;
+    }
+
+    // filter the card deck by a chosen category
+    public ArrayList<Flashcard> getDeckByCategory(String category) {
+        ArrayList<Flashcard> deckCategory = deck.stream()
+                .filter(flashcard -> flashcard.getCategory().equals(category))
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        return deckCategory;
+    }
+
+    // extract the categories from the deck
+    public ArrayList<String> getCategories() {
+        Set<String> uniqueCategories = deck.stream()
+                .map(flashcard -> flashcard.getCategory())
+                .collect(Collectors.toSet());
+
+        return new ArrayList<String>(uniqueCategories);
     }
 }
