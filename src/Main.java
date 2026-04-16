@@ -10,11 +10,11 @@ public class Main {
         FlashcardDeck myDeck = new FlashcardDeck();
 
         // Seed the deck with initial Tagalog vocabulary
-        myDeck.addCard(new Flashcard("Salamat","Thank you","Greetings"));
-        myDeck.addCard(new Flashcard("Kumusta","How are you","Greetings"));
-        myDeck.addCard(new Flashcard("Oo","Yes","Basics"));
-        myDeck.addCard(new Flashcard("Hindi","No","Basics"));
-        myDeck.addCard(new Flashcard("Tubig","Water","Food & Drink"));
+        myDeck.addCard(new TagalogCard("Salamat","Thank you","Greetings"));
+        myDeck.addCard(new TagalogCard("Kumusta","How are you","Greetings"));
+        myDeck.addCard(new TagalogCard("Oo","Yes","Basics"));
+        myDeck.addCard(new TagalogCard("Hindi","No","Basics"));
+        myDeck.addCard(new TagalogCard("Tubig","Water","Food & Drink"));
 
         System.out.println("Deck contains " + myDeck.getSize() +" cards");
 
@@ -47,32 +47,32 @@ public class Main {
                         // Play the game with the chosen category
 
                         // Get the deck by chosen category
-                        ArrayList<Flashcard> myDeckByCategory = myDeck.getDeckByCategory(myDeckCategories.get(selectedCategory-1));
+                        ArrayList<Card> myDeckByCategory = myDeck.getDeckByCategory(myDeckCategories.get(selectedCategory-1));
                         // Shuffle the deck
                         Collections.shuffle(myDeckByCategory);
 
                         // Count correct answers
                         int correctCount = 0;
 
-                        for (Flashcard card : myDeckByCategory) {
+                        for (Card card : myDeckByCategory) {
                             int guessTotal = 2;
-                            System.out.println("Please type the English word for: " + card.getTagalog());
+                            System.out.println("Please type the English word for: " + card.getFrontCard());
                             String englishTranslation = userInput.nextLine();
 
-                            while (!englishTranslation.equalsIgnoreCase(card.getEnglish()) && guessTotal > 0) {
-                                System.out.println("'" + englishTranslation + "' is not our English translation for '" + card.getTagalog() + "'. Please try again. You have " + guessTotal + " guess(s) left.");
+                            while (!englishTranslation.equalsIgnoreCase(card.getBackCard()) && guessTotal > 0) {
+                                System.out.println("'" + englishTranslation + "' is not our English translation for '" + card.getFrontCard() + "'. Please try again. You have " + guessTotal + " guess(s) left.");
                                 guessTotal--;
-                                System.out.println("Please type the English word for: " + card.getTagalog());
+                                System.out.println("Please type the English word for: " + card.getFrontCard());
                                 englishTranslation = userInput.nextLine();
                             }
-                            if (englishTranslation.equalsIgnoreCase(card.getEnglish())) {
-                                System.out.println("You translated '" + card.getTagalog() + "' to '" + englishTranslation + "' which matches our translation 👍");
+                            if (englishTranslation.equalsIgnoreCase(card.getBackCard())) {
+                                System.out.println("You translated '" + card.getFrontCard() + "' to '" + englishTranslation + "' which matches our translation 👍");
                                 System.out.println();
                                 //Update correct count
                                 correctCount++;
                             } else if (guessTotal == 0) {
-                                System.out.println("Unfortunately you translated '" + card.getTagalog() + "' incorrectly 👎");
-                                System.out.println("Our translation of '" + card.getTagalog() + "' is '" + card.getEnglish() + "' in English. Let's try another word.");
+                                System.out.println("Unfortunately you translated '" + card.getFrontCard() + "' incorrectly 👎");
+                                System.out.println("Our translation of '" + card.getFrontCard() + "' is '" + card.getBackCard() + "' in English.");
                                 System.out.println();
                             }
                         }

@@ -3,21 +3,24 @@
 A Java console application for studying Tagalog vocabulary using flashcards.
 
 ## About
-This app was built as a hands-on Java learning project. It demonstrates core 
-object-oriented programming concepts including classes, encapsulation, and 
-ArrayList collections.
+This app was built as a hands-on Java learning project. It demonstrates core
+object-oriented programming concepts including inheritance, encapsulation,
+polymorphism, collections, and streams.
 
 ## Features (current)
-- Flashcard class with Tagalog, English, and category fields
-- FlashcardDeck class to manage a collection of flashcards
-- Seeded deck with initial vocabulary across multiple categories
-- Console output displaying all cards in the deck
+- Abstract base `Card` class with `TagalogCard` subclass using inheritance
+- `FlashcardDeck` class managing a collection of `Card` objects
+- Interactive quiz mode with user input and retry logic
+- Score tracking — correct count displayed at end of quiz
+- Deck shuffle using `Collections.shuffle()`
+- Category filter with numbered menu and input validation
+- Seeded deck with Tagalog vocabulary across multiple categories
 
 ## Planned Features
-- Interactive quiz mode with user input
-- Score tracking
 - Load flashcards from a file
-- Filter cards by category
+- Save quiz scores
+- Add new cards during a session
+- Support for additional languages (SpanishCard, FrenchCard)
 
 ## Built With
 - Java

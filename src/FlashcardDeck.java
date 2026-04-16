@@ -4,18 +4,18 @@ import java.util.stream.Collectors;
 
 // Manages a collection of Flashcard objects, supporting add, display, and size operations
 public class FlashcardDeck {
-    private final ArrayList<Flashcard> deck;
+    private final ArrayList<Card> deck;
 
     public FlashcardDeck() {
         deck = new ArrayList<>();
     }
 
-    public void addCard(Flashcard card) {
+    public void addCard(Card card) {
         deck.add(card);
     }
 
     public void displayAll() {
-        for (Flashcard card : deck) {
+        for (Card card : deck) {
             card.display();
         }
     }
@@ -24,14 +24,14 @@ public class FlashcardDeck {
         return deck.size();
     }
 
-    public ArrayList<Flashcard> getDeck() {
+    public ArrayList<Card> getDeck() {
         return deck;
     }
 
     // filter the card deck by a chosen category
-    public ArrayList<Flashcard> getDeckByCategory(String category) {
-        ArrayList<Flashcard> deckCategory = deck.stream()
-                .filter(flashcard -> flashcard.getCategory().equals(category))
+    public ArrayList<Card> getDeckByCategory(String category) {
+        ArrayList<Card> deckCategory = deck.stream()
+                .filter(card -> card.getCategory().equals(category))
                 .collect(Collectors.toCollection(ArrayList::new));
 
         return deckCategory;
@@ -40,7 +40,7 @@ public class FlashcardDeck {
     // extract the categories from the deck
     public ArrayList<String> getCategories() {
         Set<String> uniqueCategories = deck.stream()
-                .map(flashcard -> flashcard.getCategory())
+                .map(card -> card.getCategory())
                 .collect(Collectors.toSet());
 
         return new ArrayList<String>(uniqueCategories);
