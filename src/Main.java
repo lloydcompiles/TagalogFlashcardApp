@@ -55,24 +55,27 @@ public class Main {
                         int correctCount = 0;
 
                         for (Card card : myDeckByCategory) {
+
+                            Quizzable quizzable = (Quizzable) card;
+
                             int guessTotal = 2;
-                            System.out.println("Please type the English word for: " + card.getFrontCard());
+                            System.out.println("Please type the English word for: " + quizzable.getQuestion());
                             String englishTranslation = userInput.nextLine();
 
-                            while (!englishTranslation.equalsIgnoreCase(card.getBackCard()) && guessTotal > 0) {
-                                System.out.println("'" + englishTranslation + "' is not our English translation for '" + card.getFrontCard() + "'. Please try again. You have " + guessTotal + " guess(s) left.");
+                            while (!quizzable.checkAnswer(englishTranslation) && guessTotal > 0) {
+                                System.out.println("'" + englishTranslation + "' is not our English translation for '" + quizzable.getQuestion() + "'. Please try again. You have " + guessTotal + " guess(s) left.");
                                 guessTotal--;
-                                System.out.println("Please type the English word for: " + card.getFrontCard());
+                                System.out.println("Please type the English word for: " + quizzable.getQuestion());
                                 englishTranslation = userInput.nextLine();
                             }
-                            if (englishTranslation.equalsIgnoreCase(card.getBackCard())) {
-                                System.out.println("You translated '" + card.getFrontCard() + "' to '" + englishTranslation + "' which matches our translation 👍");
+                            if (quizzable.checkAnswer(englishTranslation)) {
+                                System.out.println("You translated '" + quizzable.getQuestion() + "' to '" + englishTranslation + "' which matches our translation 👍");
                                 System.out.println();
                                 //Update correct count
                                 correctCount++;
                             } else if (guessTotal == 0) {
-                                System.out.println("Unfortunately you translated '" + card.getFrontCard() + "' incorrectly 👎");
-                                System.out.println("Our translation of '" + card.getFrontCard() + "' is '" + card.getBackCard() + "' in English.");
+                                System.out.println("Unfortunately you translated '" + quizzable.getQuestion() + "' incorrectly 👎");
+                                System.out.println("Our translation of '" + quizzable.getQuestion() + "' is '" + card.getBackCard() + "' in English.");
                                 System.out.println();
                             }
                         }
