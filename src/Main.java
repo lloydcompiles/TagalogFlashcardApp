@@ -48,39 +48,46 @@ public class Main {
 
                         // Get the deck by chosen category
                         ArrayList<Card> myDeckByCategory = myDeck.getDeckByCategory(myDeckCategories.get(selectedCategory-1));
-                        // Shuffle the deck
-                        Collections.shuffle(myDeckByCategory);
 
-                        // Count correct answers
-                        int correctCount = 0;
+                        // Validate deck to ensure it has cards
+                        try {
+                            myDeck.validateDeck(myDeckByCategory);
+                            // Shuffle the deck
+                            Collections.shuffle(myDeckByCategory);
 
-                        for (Card card : myDeckByCategory) {
+                            // Count correct answers
+                            int correctCount = 0;
 
-                            Quizzable quizzable = (Quizzable) card;
+                            for (Card card : myDeckByCategory) {
 
-                            int guessTotal = 2;
-                            System.out.println("Please type the English word for: " + quizzable.getQuestion());
-                            String englishTranslation = userInput.nextLine();
+                                Quizzable quizzable = (Quizzable) card;
 
-                            while (!quizzable.checkAnswer(englishTranslation) && guessTotal > 0) {
-                                System.out.println("'" + englishTranslation + "' is not our English translation for '" + quizzable.getQuestion() + "'. Please try again. You have " + guessTotal + " guess(s) left.");
-                                guessTotal--;
+                                int guessTotal = 2;
                                 System.out.println("Please type the English word for: " + quizzable.getQuestion());
-                                englishTranslation = userInput.nextLine();
-                            }
-                            if (quizzable.checkAnswer(englishTranslation)) {
-                                System.out.println("You translated '" + quizzable.getQuestion() + "' to '" + englishTranslation + "' which matches our translation 👍");
-                                System.out.println();
-                                //Update correct count
-                                correctCount++;
-                            } else if (guessTotal == 0) {
-                                System.out.println("Unfortunately you translated '" + quizzable.getQuestion() + "' incorrectly 👎");
-                                System.out.println("Our translation of '" + quizzable.getQuestion() + "' is '" + card.getBackCard() + "' in English.");
-                                System.out.println();
-                            }
-                        }
+                                String englishTranslation = userInput.nextLine();
 
-                        System.out.println("No more words left to translate. You got " + correctCount + " correct. Thanks for playing! Paalam!");
+                                while (!quizzable.checkAnswer(englishTranslation) && guessTotal > 0) {
+                                    System.out.println("'" + englishTranslation + "' is not our English translation for '" + quizzable.getQuestion() + "'. Please try again. You have " + guessTotal + " guess(s) left.");
+                                    guessTotal--;
+                                    System.out.println("Please type the English word for: " + quizzable.getQuestion());
+                                    englishTranslation = userInput.nextLine();
+                                }
+                                if (quizzable.checkAnswer(englishTranslation)) {
+                                    System.out.println("You translated '" + quizzable.getQuestion() + "' to '" + englishTranslation + "' which matches our translation 👍");
+                                    System.out.println();
+                                    //Update correct count
+                                    correctCount++;
+                                } else if (guessTotal == 0) {
+                                    System.out.println("Unfortunately you translated '" + quizzable.getQuestion() + "' incorrectly 👎");
+                                    System.out.println("Our translation of '" + quizzable.getQuestion() + "' is '" + card.getBackCard() + "' in English.");
+                                    System.out.println();
+                                }
+                            }
+
+                            System.out.println("No more words left to translate. You got " + correctCount + " correct. Thanks for playing! Paalam!");
+                        } catch (EmptyDeckException e) {
+                            System.out.println(e.getMessage());
+                        }
 
                     } else {
                         System.out.println(selectedCategory + " was entered and is not an option. Please type the number that corresponds to the category you would like to select and hit enter.");

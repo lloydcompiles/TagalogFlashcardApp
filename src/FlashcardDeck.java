@@ -45,4 +45,11 @@ public class FlashcardDeck {
 
         return new ArrayList<String>(uniqueCategories);
     }
+
+    // throw an exception if the deck has no cards in it
+    public void validateDeck(ArrayList<Card> deck) throws EmptyDeckException{
+        if(deck.isEmpty()){
+            throw new EmptyDeckException("Unfortunately the category you selected has no cards. Game over.");
+        }
+    }
 }
