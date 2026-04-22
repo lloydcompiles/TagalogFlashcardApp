@@ -16,6 +16,10 @@ public class Main {
         myDeck.addCard(new TagalogCard("Hindi","No","Basics"));
         myDeck.addCard(new TagalogCard("Tubig","Water","Food & Drink"));
 
+        // Save myDeck to csv
+        DeckFileManager.saveDeck(myDeck.getDeck(),"flashcards.csv");
+        System.out.println("Welcome to flashcard Deck! Your deck has been saved.");
+
         System.out.println("Deck contains " + myDeck.getSize() +" cards");
 
         // Get and display categories to user, get number of categories, ask to select category
