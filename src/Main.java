@@ -9,16 +9,24 @@ public class Main {
 
         FlashcardDeck myDeck = new FlashcardDeck();
 
-        // Seed the deck with initial Tagalog vocabulary
-        myDeck.addCard(new TagalogCard("Salamat","Thank you","Greetings"));
-        myDeck.addCard(new TagalogCard("Kumusta","How are you","Greetings"));
-        myDeck.addCard(new TagalogCard("Oo","Yes","Basics"));
-        myDeck.addCard(new TagalogCard("Hindi","No","Basics"));
-        myDeck.addCard(new TagalogCard("Tubig","Water","Food & Drink"));
+        // load saved deck
+        ArrayList<Card> loadedDeck = DeckFileManager.loadDeck("flashcards.csv");
+        if (!loadedDeck.isEmpty()) {
+            for (Card card : loadedDeck) {
+                myDeck.addCard(card);
+            }
+        } else {
+            // Seed the deck with initial Tagalog vocabulary
+            myDeck.addCard(new TagalogCard("Salamat","Thank you","Greetings"));
+            myDeck.addCard(new TagalogCard("Kumusta","How are you","Greetings"));
+            myDeck.addCard(new TagalogCard("Oo","Yes","Basics"));
+            myDeck.addCard(new TagalogCard("Hindi","No","Basics"));
+            myDeck.addCard(new TagalogCard("Tubig","Water","Food & Drink"));
 
-        // Save myDeck to csv
-        DeckFileManager.saveDeck(myDeck.getDeck(),"flashcards.csv");
-        System.out.println("Welcome to flashcard Deck! Your deck has been saved.");
+            // Save myDeck to csv
+            DeckFileManager.saveDeck(myDeck.getDeck(),"flashcards.csv");
+            System.out.println("Welcome to flashcard Deck! Your deck has been saved.");
+        }
 
         System.out.println("Deck contains " + myDeck.getSize() +" cards");
 
