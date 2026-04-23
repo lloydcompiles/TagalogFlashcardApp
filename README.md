@@ -15,10 +15,9 @@ polymorphism, collections, and streams.
 - Deck shuffle using `Collections.shuffle()`
 - Category filter with numbered menu and input validation
 - Seeded deck with Tagalog vocabulary across multiple categories
-- Deck saved to `flashcards.csv` on startup using file I/O
+- Deck persisted to `flashcards.csv` — saved on first run, loaded on subsequent runs
 
 ## Planned Features
-- Load flashcards from CSV file on startup
 - Save quiz scores
 - Add new cards during a session
 - Support for additional languages (SpanishCard, FrenchCard)
