@@ -28,6 +28,9 @@ public class Main {
             System.out.println("Welcome to flashcard Deck! Your deck has been saved.");
         }
 
+        // Ask if User wants to add a new card
+        DeckFileManager.addNewCards(myDeck, userInput);
+
         System.out.println("Deck contains " + myDeck.getSize() +" cards");
 
         // Get and display categories to user, get number of categories, ask to select category

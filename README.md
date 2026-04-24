@@ -16,10 +16,10 @@ polymorphism, collections, and streams.
 - Category filter with numbered menu and input validation
 - Seeded deck with Tagalog vocabulary across multiple categories
 - Deck persisted to `flashcards.csv` — saved on first run, loaded on subsequent runs
+- Add new cards during a session
 
 ## Planned Features
 - Save quiz scores
-- Add new cards during a session
 - Support for additional languages (SpanishCard, FrenchCard)
 
 ## Built With
