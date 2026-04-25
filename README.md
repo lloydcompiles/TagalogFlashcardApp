@@ -18,6 +18,7 @@ polymorphism, collections, and streams.
 - Deck persisted to `flashcards.csv` — saved on first run, loaded on subsequent runs
 - Add new cards during a session
 - Save quiz scores
+- Spaced repetition — failed cards tracked during quiz and offered for immediate re-quiz
 
 ## Planned Features
 - Support for additional languages (SpanishCard, FrenchCard)

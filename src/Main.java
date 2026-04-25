@@ -70,6 +70,9 @@ public class Main {
                             // Shuffle the deck
                             Collections.shuffle(myDeckByCategory);
 
+                            // Store cards that the User got wrong
+                            ArrayList<Card> failedCards = new ArrayList<>();
+
                             // Count correct answers
                             int correctCount = 0;
 
@@ -96,12 +99,59 @@ public class Main {
                                     System.out.println("Unfortunately you translated '" + quizzable.getQuestion() + "' incorrectly 👎");
                                     System.out.println("Our translation of '" + quizzable.getQuestion() + "' is '" + card.getBackCard() + "' in English.");
                                     System.out.println();
+                                    // Update the list of failed cards
+                                    failedCards.add(card);
                                 }
                             }
 
-                            // save the current score
-                            DeckFileManager.saveScore(myDeckCategories.get(selectedCategory-1),correctCount,myDeckByCategory.size());
-                            System.out.println("No more words left to translate. You got " + correctCount + " correct. Thanks for playing! Paalam!");
+                            System.out.println("No more words left to translate.");
+
+                            // Ask User if they want to repeat the words they got wrong
+                            if (!failedCards.isEmpty()) {
+                                System.out.println("You got " + failedCards.size() + " word(s) wrong. Would you like to retry them one last time? (Type Y or N and hit enter)");
+                                String yesOrNo;
+                                yesOrNo = userInput.nextLine();
+                                if (yesOrNo.equalsIgnoreCase("y") || yesOrNo.equalsIgnoreCase("yes")) {
+
+                                    // Count correct re-quiz answers
+                                    int correctReQuizCount = 0;
+
+                                    for (Card card : failedCards) {
+
+                                        Quizzable quizzable = (Quizzable) card;
+
+                                        System.out.println("Please type the English word for: " + quizzable.getQuestion());
+                                        String englishTranslation = userInput.nextLine();
+
+                                        if (quizzable.checkAnswer(englishTranslation)) {
+                                            System.out.println("You translated '" + quizzable.getQuestion() + "' to '" + englishTranslation + "' which matches our translation 👍");
+                                            System.out.println();
+                                            //Update correct count
+                                            correctReQuizCount++;
+                                        } else {
+                                            System.out.println("Unfortunately you translated '" + quizzable.getQuestion() + "' incorrectly 👎");
+                                            System.out.println("Our translation of '" + quizzable.getQuestion() + "' is '" + card.getBackCard() + "' in English.");
+                                            System.out.println();
+                                        }
+                                    }
+
+                                    // save the score for the re-quiz
+                                    DeckFileManager.saveScore(myDeckCategories.get(selectedCategory - 1), (correctCount + correctReQuizCount), myDeckByCategory.size());
+                                    System.out.println("You got " + correctReQuizCount + " correct on the re-quiz.");
+                                    System.out.println("You got " + (correctCount + correctReQuizCount) + " of " + myDeckByCategory.size() + " correct overall. Thanks for playing! Paalam!");
+                                } else {
+                                    // save the current score
+                                    DeckFileManager.saveScore(myDeckCategories.get(selectedCategory - 1), correctCount, myDeckByCategory.size());
+
+                                    System.out.println("You got " + correctCount + " of " + myDeckByCategory.size() + " correct. Thanks for playing! Paalam!");
+                                }
+                            } else {
+                                // save the current score
+                                DeckFileManager.saveScore(myDeckCategories.get(selectedCategory - 1), correctCount, myDeckByCategory.size());
+
+                                System.out.println("You got " + correctCount + " of " + myDeckByCategory.size() + " correct. Thanks for playing! Paalam!");
+                            }
+
                         } catch (EmptyDeckException e) {
                             System.out.println(e.getMessage());
                         }
