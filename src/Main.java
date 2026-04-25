@@ -99,6 +99,8 @@ public class Main {
                                 }
                             }
 
+                            // save the current score
+                            DeckFileManager.saveScore(myDeckCategories.get(selectedCategory-1),correctCount,myDeckByCategory.size());
                             System.out.println("No more words left to translate. You got " + correctCount + " correct. Thanks for playing! Paalam!");
                         } catch (EmptyDeckException e) {
                             System.out.println(e.getMessage());

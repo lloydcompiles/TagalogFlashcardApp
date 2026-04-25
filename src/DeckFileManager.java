@@ -1,4 +1,6 @@
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -65,5 +67,20 @@ public class DeckFileManager {
             DeckFileManager.saveDeck(newDeck.getDeck(),"flashcards.csv");
         }
 
+    }
+
+    public static void saveScore(String category, int correct, int total) {
+
+        try (PrintWriter pw = new PrintWriter(new FileWriter("score_history.txt", true))) {
+
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            String formattedDate = now.format(formatter);
+
+            pw.println(formattedDate + " | Category: " + category + " | Score: " + correct + "/" + total);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

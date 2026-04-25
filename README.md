@@ -17,9 +17,9 @@ polymorphism, collections, and streams.
 - Seeded deck with Tagalog vocabulary across multiple categories
 - Deck persisted to `flashcards.csv` — saved on first run, loaded on subsequent runs
 - Add new cards during a session
+- Save quiz scores
 
 ## Planned Features
-- Save quiz scores
 - Support for additional languages (SpanishCard, FrenchCard)
 
 ## Built With
