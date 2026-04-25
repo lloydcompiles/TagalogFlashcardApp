@@ -40,33 +40,31 @@ public class DeckFileManager {
     }
 
     public static void addNewCards(FlashcardDeck newDeck, Scanner inputNewCards){
-
         String yesOrNo;
         String inputTagalogWord;
         String inputEnglishTranslation;
         String inputCategory;
 
-        System.out.println("Would you like to add new cards? (Type Y or N and hit enter)");
-        yesOrNo = inputNewCards.nextLine();
-        if (yesOrNo.equalsIgnoreCase("y") || yesOrNo.equalsIgnoreCase("yes")) {
-            boolean keepEntering = true;
-            while (keepEntering) {
-                System.out.println("Please enter the Tagalog word you would like to add.");
-                inputTagalogWord = inputNewCards.nextLine();
-                System.out.println("Please enter the English translation of " + inputTagalogWord + ".");
-                inputEnglishTranslation = inputNewCards.nextLine();
-                System.out.println("Please enter the Category, for example Greetings or Basics or Food & Drink");
-                inputCategory = inputNewCards.nextLine();
-                newDeck.addCard(new TagalogCard(inputTagalogWord, inputEnglishTranslation, inputCategory));
-                System.out.println("Would you like to add another card? (Type Y or N and hit enter)");
-                yesOrNo = inputNewCards.nextLine();
-                if (!(yesOrNo.equalsIgnoreCase("y") || yesOrNo.equalsIgnoreCase("yes"))) {
-                    keepEntering = false;
-                }
-            }
-            DeckFileManager.saveDeck(newDeck.getDeck(),"flashcards.csv");
-        }
+        boolean keepEntering = true;
+        while (keepEntering) {
+            System.out.println("Please enter the Tagalog word you would like to add.");
+            inputTagalogWord = inputNewCards.nextLine();
+            System.out.println("Please enter the English translation of " + inputTagalogWord + ".");
+            inputEnglishTranslation = inputNewCards.nextLine();
+            System.out.println("Please enter the Category, for example Greetings or Basics or Food & Drink");
+            inputCategory = inputNewCards.nextLine();
+            newDeck.addCard(new TagalogCard(inputTagalogWord, inputEnglishTranslation, inputCategory));
 
+            // Ask User if they want to add more
+            System.out.println("Would you like to add another card? (Type Y or N and hit enter)");
+            yesOrNo = inputNewCards.nextLine();
+            if (!(yesOrNo.equalsIgnoreCase("y") || yesOrNo.equalsIgnoreCase("yes"))) {
+                keepEntering = false;
+            }
+        }
+            // Save the new card(s)
+            DeckFileManager.saveDeck(newDeck.getDeck(),"flashcards.csv");
+            System.out.println("You have successfully added your card(s) and they have been saved.");
     }
 
     public static void saveScore(String category, int correct, int total) {
